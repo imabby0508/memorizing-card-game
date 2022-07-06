@@ -17,6 +17,7 @@ const Symbols = [
 // 13-25：愛心 1-13
 // 26-38：方塊 1-13
 // 39-51：梅花 1-13
+// test git
 
 const view = {
   getCardContent(index) {
@@ -93,25 +94,24 @@ const view = {
         // 事件執行一次之後，就要卸載這個監聽器
         {
           once: true,
-        });
+        }
+      );
     });
   },
 
   showGameFinished() {
-    const div = document.createElement('div');
-    div.classList.add('completed');
-    console.log(model)
+    const div = document.createElement("div");
+    div.classList.add("completed");
+    console.log(model);
     div.innerHTML = `
       <p>Complete!</p>
       <p>Score: ${model.score}</p>
       <p>You've tried: ${model.triedTimes} times</p>`;
 
-    const header = document.querySelector('#header');
+    const header = document.querySelector("#header");
     header.before(div);
-  }  
+  },
 };
-
-
 
 const utility = {
   getRandomNumberArray(count) {
@@ -143,7 +143,6 @@ const model = {
   triedTimes: 0,
 };
 
-
 const controller = {
   currentState: GAME_STATE.FirstCardAwaits,
   generateCards() {
@@ -153,7 +152,7 @@ const controller = {
   dispatchCardAction(card) {
     if (!card.classList.contains("back")) {
       return;
-    };
+    }
 
     switch (this.currentState) {
       case GAME_STATE.FirstCardAwaits:
@@ -174,8 +173,8 @@ const controller = {
           view.pairCards(...model.revealedCards);
           // 清空 model 的暫存卡片陣列
           model.revealedCards = [];
-          if(model.score === 260) {
-            console.log('showGameFinished');
+          if (model.score === 260) {
+            console.log("showGameFinished");
             this.currentState = GAME_STATE.GameFinished;
             view.showGameFinished();
             return;
@@ -187,9 +186,9 @@ const controller = {
           view.appendWrongAnimation(...model.revealedCards);
           // 延遲一秒讓使用者記憶卡片
           setTimeout(this.resetCards, 1000);
-        };
+        }
         break;
-    };
+    }
   },
 
   resetCards() {
@@ -203,7 +202,7 @@ controller.generateCards();
 
 // 為Node List (array-like)
 document.querySelectorAll(".card").forEach((card) => {
-  card.addEventListener("click", (event) => {    
+  card.addEventListener("click", (event) => {
     controller.dispatchCardAction(card);
   });
 });
