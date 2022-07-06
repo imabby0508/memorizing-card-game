@@ -17,8 +17,6 @@ const Symbols = [
 // 13-25：愛心 1-13
 // 26-38：方塊 1-13
 // 39-51：梅花 1-13
-// test git
-
 const view = {
   getCardContent(index) {
     const number = this.transformNumber((index % 13) + 1);
